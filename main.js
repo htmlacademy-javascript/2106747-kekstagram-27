@@ -1,16 +1,9 @@
-// Функция, возвращающая случайное целое число из переданного диапазона включительно
-function getRandomInt(min, max) {
-    if (min < 0 || max < 0 || min > max) {
-        return NaN;
+let getRandomInt = (min, max) => {
+    const isArgumentsValid = (min >= 0 && max >= 0 && min < max);
+    if (isArgumentsValid) {
+      return Math.floor(min + Math.random() * (max + 1 - min));
     }
-        return Math.floor(min + Math.random() * (max + 1 - min));
+      return RangeError('Параметры должены быть неотрицательными числами и min <= max');
   };
 
-//Функция для проверки максимальной длины строки
-function getVeryfiMaxLength(str, maxLength) {
-    if (str.length <= maxLength) {
-        return true;
-    }
-        return false;
-
-};
+let getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
