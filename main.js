@@ -1,13 +1,12 @@
-const getRandomInt = (min, max) => {
-    const isArgumentsValid = (min >= 0 && max >= 0 && min < max);
-    if (isArgumentsValid) {
-      return Math.floor(min + Math.random() * (max + 1 - min));
-    }
-      return RangeError('Параметры должены быть неотрицательными числами и min <= max');
-  };
-
-let getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
 const ALL_PHOTO_COUNT = 25;
+const COMMENTS_COUNT = 15;
+const AVATAR_COUNT = 6;
+
+const LIKES_COUNT = {
+  MAX: 200,
+  MIN: 15
+};
+
 const DESCRIPTIONS = [
   'Вессений день',
   'Осень',
@@ -43,46 +42,41 @@ const NAMES = [
   'Ирина'
 ];
 
+const getRandomInt = (min, max) => {
+    const isArgumentsValid = min >= 0 && max >= 0 && min < max;
+    if (isArgumentsValid) {
+      return Math.floor(min + Math.random() * (max + 1 - min));
+    }
+      return RangeError('Параметры должены быть неотрицательными числами и min <= max');
+  };
 
+const getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
 
 const getRandomArrayElements = (elements) => {
   return elements[getRandomInt(0,elements.length - 1)];
 };
-let counterId = 0;
-let getId = () => {
-  counterId++;
-  return counterId;
-};
 
-let counterPhotoId = 0;
-let getPhotoId = () => {
-  counterPhotoId++;
-  return counterPhotoId;
-};
+const createMessage = () => {
+  return Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
+}
 
-let counterCommentsId = 0;
-let getCommentsId = () => {
-  counterCommentsId++;
-  return counterCommentsId;
-};
-const createRandomComments = () => {
+const createRandomComment = (index) => {
   return {
-    id: getCommentsId(),
-    avatar: 'img/avatar-' + getRandomInt(1,6) + '.svg',
-    message: getRandomArrayElements(MESSAGES),
+    id: index,
+    avatar: `img/avatar-${getRandomInt(1,AVATAR_COUNT)}.svg`,
+    message: createMessage(),
     name: getRandomArrayElements(NAMES)
   };
 };
 
-const createPublishedImage = () => {
+const createPublishedImage = (index) => {
   return {
-    id: getId(),
-    url: 'photos/' + getPhotoId() + '.jpg',
+    id: index,
+    url: `photos/${index}.jpg`,
     description: getRandomArrayElements(DESCRIPTIONS),
-    likes: getRandomInt(15, 200),
-    comments: createRandomComments()
+    likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
+    comments: Array.from({length: getRandomInt(1, COMMENTS_COUNT) },(_, commentId) => createRandomComment(commentId + 1))
   };
 };
 
-const allPhotos = Array.from({length: ALL_PHOTO_COUNT}, createPublishedImage);
-console.log(allPhotos);
+const allPhotos = Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
