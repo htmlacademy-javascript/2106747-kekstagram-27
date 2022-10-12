@@ -1,3 +1,6 @@
+import { getRandomArrayElements } from "./until";
+import { getRandomInt } from "./until";
+
 const ALL_PHOTO_COUNT = 25;
 const COMMENTS_COUNT = 15;
 const AVATAR_COUNT = 6;
@@ -42,20 +45,6 @@ const NAMES = [
   'Ирина'
 ];
 
-const getRandomInt = (min, max) => {
-    const isArgumentsValid = min >= 0 && max >= 0 && min < max;
-    if (isArgumentsValid) {
-      return Math.floor(min + Math.random() * (max + 1 - min));
-    }
-      return RangeError('Параметры должены быть неотрицательными числами и min <= max');
-  };
-
-const getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
-
-const getRandomArrayElements = (elements) => {
-  return elements[getRandomInt(0,elements.length - 1)];
-};
-
 const createMessage = () => {
   return Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
 }
@@ -79,4 +68,6 @@ const createPublishedImage = (index) => {
   };
 };
 
-const allPhotos = Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
+const allPhotos = () => Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
+
+export {allPhotos};
