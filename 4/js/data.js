@@ -1,5 +1,5 @@
-import {getRandomArrayElements} from './until';
-import {getRandomInt} from './until';
+import {getRandomArrayElements} from './until.js';
+import {getRandomInt} from './until.js';
 
 const ALL_PHOTO_COUNT = 25;
 const COMMENTS_COUNT = 15;
@@ -68,6 +68,8 @@ const createPublishedImage = (index) => {
   };
 };
 
-const allPhotos = () => {Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1))};
+const allPhotos = () => {
+  return Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
+};
 
 export {allPhotos};
