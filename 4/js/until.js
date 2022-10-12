@@ -13,3 +13,5 @@ return elements[getRandomInt(0,elements.length - 1)];
 };
 
 export {getRandomArrayElements, getRandomInt};
+
+console.log(getVeryfiMaxLength);
