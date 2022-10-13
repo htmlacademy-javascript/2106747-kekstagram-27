@@ -1,4 +1,3 @@
-import './until.js';
-import {allPhotos} from './data.js';
+import {createAllPhotos} from './data';
 
-console.log(allPhotos);
+createAllPhotos();
