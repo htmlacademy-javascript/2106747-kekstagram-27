@@ -1,3 +1,6 @@
+import {getRandomArrayElements} from './until.js';
+import {getRandomInt} from './until.js';
+
 const ALL_PHOTO_COUNT = 25;
 const COMMENTS_COUNT = 15;
 const AVATAR_COUNT = 6;
@@ -42,41 +45,27 @@ const NAMES = [
   'Ирина'
 ];
 
-const getRandomInt = (min, max) => {
-    const isArgumentsValid = min >= 0 && max >= 0 && min < max;
-    if (isArgumentsValid) {
-      return Math.floor(min + Math.random() * (max + 1 - min));
-    }
-      return RangeError('Параметры должены быть неотрицательными числами и min <= max');
-  };
-
-const getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
-
-const getRandomArrayElements = (elements) => {
-  return elements[getRandomInt(0,elements.length - 1)];
-};
-
 const createMessage = () => {
-  return Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
-}
-
-const createRandomComment = (index) => {
-  return {
-    id: index,
-    avatar: `img/avatar-${getRandomInt(1,AVATAR_COUNT)}.svg`,
-    message: createMessage(),
-    name: getRandomArrayElements(NAMES)
-  };
+  Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
 };
 
-const createPublishedImage = (index) => {
-  return {
-    id: index,
-    url: `photos/${index}.jpg`,
-    description: getRandomArrayElements(DESCRIPTIONS),
-    likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
-    comments: Array.from({length: getRandomInt(1, COMMENTS_COUNT) },(_, commentId) => createRandomComment(commentId + 1))
-  };
+const createRandomComment = (index) => ({
+  id: index,
+  avatar: `img/avatar-${getRandomInt(1,AVATAR_COUNT)}.svg`,
+  message: createMessage(),
+  name: getRandomArrayElements(NAMES)
+});
+
+const createPublishedImage = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElements(DESCRIPTIONS),
+  likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
+  comments: Array.from({length: getRandomInt(1, COMMENTS_COUNT) },(_, commentId) => createRandomComment(commentId + 1))
+});
+
+const createAllPhotos = () => {
+  Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
 };
 
-const allPhotos = Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
+export {createAllPhotos};
