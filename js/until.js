@@ -3,15 +3,13 @@ const getRandomInt = (min, max) => {
   if (isArgumentsValid) {
     return Math.floor(min + Math.random() * (max + 1 - min));
   }
-    return RangeError('Параметры должены быть неотрицательными числами и min <= max');
+  return RangeError('Параметры должены быть неотрицательными числами и min <= max');
 };
 
 const getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
 
-const getRandomArrayElements = (elements) => {
-return elements[getRandomInt(0,elements.length - 1)];
-};
+const getRandomArrayElements = (elements) => elements[getRandomInt(0,elements.length - 1)];
 
 export {getRandomArrayElements, getRandomInt};
 
-console.log(getVeryfiMaxLength);
+getVeryfiMaxLength();

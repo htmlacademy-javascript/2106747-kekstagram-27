@@ -46,30 +46,26 @@ const NAMES = [
 ];
 
 const createMessage = () => {
-  return Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
-}
-
-const createRandomComment = (index) => {
-  return {
-    id: index,
-    avatar: `img/avatar-${getRandomInt(1,AVATAR_COUNT)}.svg`,
-    message: createMessage(),
-    name: getRandomArrayElements(NAMES)
-  };
+  Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
 };
 
-const createPublishedImage = (index) => {
-  return {
-    id: index,
-    url: `photos/${index}.jpg`,
-    description: getRandomArrayElements(DESCRIPTIONS),
-    likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
-    comments: Array.from({length: getRandomInt(1, COMMENTS_COUNT) },(_, commentId) => createRandomComment(commentId + 1))
-  };
+const createRandomComment = (index) => ({
+  id: index,
+  avatar: `img/avatar-${getRandomInt(1,AVATAR_COUNT)}.svg`,
+  message: createMessage(),
+  name: getRandomArrayElements(NAMES)
+});
+
+const createPublishedImage = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElements(DESCRIPTIONS),
+  likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
+  comments: Array.from({length: getRandomInt(1, COMMENTS_COUNT) },(_, commentId) => createRandomComment(commentId + 1))
+});
+
+const createAllPhotos = () => {
+  Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
 };
 
-const allPhotos = () => {
-  return Array.from({length: ALL_PHOTO_COUNT}, (_, photoIndex) => createPublishedImage(photoIndex + 1));
-};
-
-export {allPhotos};
+export {createAllPhotos};
