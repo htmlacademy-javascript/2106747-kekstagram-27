@@ -12,4 +12,4 @@ const getRandomArrayElements = (elements) => elements[getRandomInt(0,elements.le
 
 export {getRandomArrayElements, getRandomInt};
 
-getVeryfiMaxLength();
+getVeryfiMaxLength('1');
