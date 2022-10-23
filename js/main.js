@@ -1,3 +1,4 @@
-import {createAllPhotos} from './data';
+import { createAllPhotos } from './data.js';
+import { renderPictures } from './picture.js';
 
-createAllPhotos();
+renderPictures(createAllPhotos());
