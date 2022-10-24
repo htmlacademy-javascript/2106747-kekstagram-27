@@ -45,9 +45,7 @@ const NAMES = [
   'Ирина'
 ];
 
-const createMessage = () => {
-  Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
-};
+const createMessage = () => Array.from({length:getRandomInt(1,2)}, () => getRandomArrayElements(MESSAGES)).join(' ');
 
 const createRandomComment = (index) => ({
   id: index,
