@@ -1,3 +1,5 @@
+import { isEscape } from './until.js';
+
 const bigPicture = document.querySelector('.big-picture');
 const commentList = document.querySelector('.social__comments');
 const body = document.querySelector('body');
@@ -33,12 +35,11 @@ const hideBigPicture = () => {
   document.removeEventListener('keydown', onEscKeyDown);
 };
 
-function onEscKeyDown (evt) {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
+const onEscKeyDown = () => {
+  if (isEscape) {
     hideBigPicture();
   }
-}
+};
 
 const onCancelButtonClick = () => {
   hideBigPicture();
