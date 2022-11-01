@@ -1,7 +1,7 @@
+import { isEscape } from './until.js';
+
 const bigPicture = document.querySelector('.big-picture');
-const commentCount = document.querySelector('.social__comment-count');
 const commentList = document.querySelector('.social__comments');
-const commenstLoader = document.querySelector('.comments-loader');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('.big-picture__cancel');
 
@@ -35,8 +35,8 @@ const hideBigPicture = () => {
   document.removeEventListener('keydown', onEscKeyDown);
 };
 
-function onEscKeyDown(evt) {
-  if (evt.key === 'Escape') {
+function onEscKeyDown (evt) {
+  if (isEscape(evt)) {
     evt.preventDefault();
     hideBigPicture();
   }
@@ -46,18 +46,17 @@ const onCancelButtonClick = () => {
   hideBigPicture();
 };
 
-const renderPictureDetails = ({ url, likes, description }) => {
+const renderPictureDetails = ({ comments, url, likes, description }) => {
   bigPicture.querySelector('.big-picture__img img').src = url;
   bigPicture.querySelector('.big-picture__img img').alt = description;
   bigPicture.querySelector('.likes-count').textContent = likes;
   bigPicture.querySelector('.social__caption').textContent = description;
+  bigPicture.querySelector('.comments-count').textContent = comments.length;
 };
 
 const showBigPicture = (data) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  commenstLoader.classList.add('hidden');
-  commentCount.classList.add('hidden');
   document.addEventListener('keydown', onEscKeyDown);
 
   renderPictureDetails(data);
