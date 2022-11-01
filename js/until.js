@@ -10,11 +10,7 @@ const getVeryfiMaxLength = (str, maxLength) => str.length <= maxLength;
 
 const getRandomArrayElements = (elements) => elements[getRandomInt(0,elements.length - 1)];
 
-const isEscape = (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-  }
-};
+const isEscape = (evt) => evt.key === 'Escape';
 
 export {getRandomArrayElements, getRandomInt, isEscape};
 

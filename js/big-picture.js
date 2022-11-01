@@ -35,11 +35,12 @@ const hideBigPicture = () => {
   document.removeEventListener('keydown', onEscKeyDown);
 };
 
-const onEscKeyDown = () => {
-  if (isEscape) {
+function onEscKeyDown (evt) {
+  if (isEscape(evt)) {
+    evt.preventDefault();
     hideBigPicture();
   }
-};
+}
 
 const onCancelButtonClick = () => {
   hideBigPicture();
